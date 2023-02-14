@@ -8,14 +8,14 @@ fs.readFile(`${path_files}/manifesto.lob`, 'utf8', (err, data) => {
         return;
     }
 
-    const files = data.match(/<nfeProc.*?>.+?<\/nfeProc>/gi)
+    const files = data.match(/<nfeProc.*?>.*?<\/nfeProc>/gsi)
 
     for (let index = 0; index < files.length; index++) {
         const element = files[index]
         const xml = `<?xml version="1.0" encoding="UTF-8" ?>${element}`
         const name = getNameXML(element)
 
-        createXML(xml, name)
+        createXML(xml, `Arquivo ${index} - ${name}`)
     }
 });
 
